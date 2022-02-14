@@ -1,48 +1,25 @@
-function clearScreen() {
-    document.querySelector('.number').innerText = '';
-}
+document.querySelector('#key').addEventListener('click', (e) => {
+    const keyPad = e.target.innerText;
+    console.log(keyPad);
+    let display = document.querySelector('#display');
+    if ((keyPad == '0') || (keyPad == '1') || (keyPad == '2') || (keyPad == '3') || (keyPad == '5') || (keyPad == '6') || (keyPad == '7') || (keyPad == '8') || (keyPad == '9') || (keyPad == '4') || (keyPad == '.')) {
+        const number = (keyPad);
+        display.value += number;
+    } else if ((keyPad == '+') || (keyPad == '-') || (keyPad == '*') || (keyPad == '/') || (keyPad == '%') || (keyPad == '+/-')) {
+        display.value += keyPad;
+    } else if (keyPad == '=') {
+        calc = display.value;
+        console.log(calc);
 
-function display(value) {
-    // console.log(value);
-    return document.querySelector('.display-num').innerText += value;
-}
-
-function calculate() {
-    let calculatedNumber = document.querySelector('.display-num').innerText;
-    let specialChar = '';
-    let digit = 0;
-    for (let num of calculatedNumber) {
-        console.log(num);
-        if ((num = '*') || (num = '/') || (num = '+') || (num = '-')) {
-            specialChar = num.toString();
-
-        } else if (typeof num == 'number') {
-            digit = parseFloat(num);
-            // console.log(digit);
-        }
+        calculate(calc);
+    } else if ((keyPad == 'C')) {
+        display.value = '';
     }
-    console.log(specialChar);
 
+})
+
+function calculate(eqn) {
+    let display = document.querySelector('#display');
+    display.value = eval(eqn);
+    console.log(display.value);
 }
-
-let operations = document.querySelectorAll('.operation');
-let number = document.querySelectorAll('.number');
-let equal = document.querySelector('.equal');
-let point = document.querySelector('.point');
-let equation = 0;
-
-number.forEach(button => {
-    button.addEventListener('click', () => {
-        display(button.innerText);
-    })
-})
-
-operations.forEach(button => {
-    button.addEventListener('click', () => {
-        display(button.innerText);
-    })
-})
-
-equal.addEventListener('click', () => {
-    calculate();
-})
