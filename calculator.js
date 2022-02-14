@@ -14,6 +14,9 @@ document.querySelector('#key').addEventListener('click', (e) => {
         calculate(calc);
     } else if ((keyPad == 'C')) {
         display.value = '';
+    } else if ((keyPad == 'Del')) {
+        const deleteBtn = display.value.slice(0, -1);
+        calculate(deleteBtn);
     }
 
 })
